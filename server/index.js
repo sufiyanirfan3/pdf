@@ -13,15 +13,27 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// app.post("/create-pdf", (req, res) => {
+//   pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", (err) => {
+//     if (err) {
+//       res.send(Promise.reject());
+//     } else {
+//       res.send(Promise.resolve());
+//     }
+//   });
+// });
 app.post("/create-pdf", (req, res) => {
-  pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", (err) => {
-    if (err) {
-      res.send(Promise.reject());
-    } else {
-      res.send(Promise.resolve());
-    }
+    pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+      } else {
+        res.status(200).send("PDF Created Successfully");
+      }
+    });
   });
-});
+
+  
 app.get("/", (req, res) => {
   res.send("pdf get");
 });
