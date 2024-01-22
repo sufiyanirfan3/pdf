@@ -23,7 +23,15 @@ app.use(bodyParser.json());
 //   });
 // });
 app.post("/create-pdf", (req, res) => {
-    pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", (err) => {
+  pdf
+    .create(pdfTemplate(req.body), {
+      childProcessOptions: {
+        env: {
+          OPENSSL_CONF: "/dev/null",
+        },
+      },
+    })
+    .toFile("result.pdf", (err) => {
       if (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
@@ -31,9 +39,8 @@ app.post("/create-pdf", (req, res) => {
         res.status(200).send("PDF Created Successfully");
       }
     });
-  });
+});
 
-  
 app.get("/", (req, res) => {
   res.send("pdf get");
 });
