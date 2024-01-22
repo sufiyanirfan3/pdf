@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000/",
+  "proxy": "https://pdf-5sg8.onrender.com/",
   "dependencies": {
     "axios": "^0.18.0",
     "file-saver": "^2.0.0",

@@ -22,6 +22,9 @@ app.post('/create-pdf', (req, res) => {
         res.send(Promise.resolve());
     });
 });
+app.get('/', (req, res) => {
+    res.send("pdf get")
+})
 
 app.get('/fetch-pdf', (req, res) => {
     res.sendFile(`${__dirname}/result.pdf`)
